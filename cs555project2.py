@@ -1,6 +1,8 @@
 # Michael Arrabito CS555 Project 2
 import os
 import sys
+import Family
+import Person
 
 gedcom_file_path = os.path.join(os.getcwd(), 'family.ged')
 
