@@ -83,8 +83,12 @@ for line in f.readlines():
         if line[2] == 'N':
             new_family.divorced = True
 
+if new_family:
+    families.append(new_family)
+    
 for person in people:
     print(person.id, person.name)
 
 for family in families:
     print(family.id, family.husband, family.wife)
+
