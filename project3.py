@@ -101,5 +101,6 @@ print(pt1)
 pt2 = PrettyTable()
 pt2.field_names = ["ID", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
 for family in families:
+
     pt2.add_row([family.id, family.husband.id, family.husband.name, family.wife.id, family.wife.name, family.children])
 print(pt2)
