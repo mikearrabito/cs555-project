@@ -1,4 +1,5 @@
 class Person:
+    spouse = list()
 
     def __init__(self):
         pass
@@ -24,8 +25,8 @@ class Person:
     def set_is_child(self, is_child: bool):
         self.is_child = is_child
     
-    def set_is_spouse(self, is_spouse):
-        self.is_spouse = is_spouse
+    def set_spouse(self, spouse):
+        self.spouse.append(spouse)
 
     def set_fam(self, fam: str):
         self.fam = fam

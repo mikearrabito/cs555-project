@@ -6,6 +6,7 @@ class Family:
     wife = None
     children = list()
     family_members = list()
+    divorced = False
 
     def __init__(self, id):
         self.family_members = list()
