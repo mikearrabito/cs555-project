@@ -1,4 +1,4 @@
-0 NOTE Michael Arrabito CS555-project
+0 NOTE CS555 Group 5 Project
 0 HEAD
 1 SOUR Family Echo
 2 WWW http://www.familyecho.com/
@@ -9,7 +9,6 @@
 2 VERS 5.5.1
 2 FORM LINEAGE-LINKED
 1 SUBM @I1@
-2 NAME a a
 1 SUBN
 1 CHAR UTF-8
 0 @I1@ INDI
