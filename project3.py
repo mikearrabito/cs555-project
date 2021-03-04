@@ -3,6 +3,7 @@ import os
 import sys
 import Family
 import Person
+from prettytable import PrettyTable
 
 gedcom_file_path = os.path.join(os.getcwd(), 'family.ged')
 
@@ -29,3 +30,8 @@ for line in f.readlines():
 
 for person in people:
     print(person.id, person.name)
+
+pt = PrettyTable()
+pt.field_names = ["ID, Name, Gender, Birthday, Age, Alive, Death, Child, Spouse"]
+for person in people:
+    pt.add_row(person.id, person.name, person.gender, person.birthday, person.age, peron.is_alive, perosn.death)
