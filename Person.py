@@ -1,11 +1,13 @@
 import datetime
 
 class Person:
-    spouse = list()
+    
 
     def __init__(self):
         self.is_alive = True
         self.death = "N/A"
+        self.spouse = []
+        self.child = []
     
     def set_ID(self, id: str):
         self.id = id
@@ -34,5 +36,5 @@ class Person:
         self.spouse.append(spouse)
 
     def set_fam(self, fam: str):
-        self.fam = fam
+        self.child.append(fam)
     
