@@ -1,3 +1,5 @@
+import datetime
+
 class Person:
     spouse = list()
 
@@ -15,6 +17,10 @@ class Person:
 
     def set_birthday(self, birthday: str):
         self.birthday = birthday
+        today = datetime.date.today()
+        birthday_date = datetime.datetime.strptime(birthday, "%d %b %Y")
+        age = today.year - birthday_date.year 
+        self.age = age
 
     def set_is_alive(self, is_alive: bool):
         self.is_alive = is_alive
