@@ -3,6 +3,7 @@ import os
 import sys
 import Family
 import Person
+from prettytable import PrettyTable
 
 gedcom_file_path = os.path.join(os.getcwd(), 'family.ged')
 
@@ -83,8 +84,22 @@ for line in f.readlines():
         if line[2] == 'N':
             new_family.divorced = True
 
-for person in people:
-    print(person.id, person.name)
-
 for family in families:
-    print(family.id, family.husband, family.wife)
+    for person in people:
+        if family.wife == person.id:
+            family.add_wife(person)
+        elif family.husband == person.id:
+            family.add_husband(person)
+
+pt1 = PrettyTable()
+
+pt1.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Spouse"]
+for person in people:
+    pt1.add_row([person.id, person.name, person.gender, person.birthday, person.age, person.is_alive, person.death, person.spouse])
+print(pt1)
+
+pt2 = PrettyTable()
+pt2.field_names = ["ID", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
+for family in families:
+    pt2.add_row([family.id, family.husband.id, family.husband.name, family.wife.id, family.wife.name, family.children])
+print(pt2)

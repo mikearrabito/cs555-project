@@ -4,7 +4,8 @@ class Person:
     spouse = list()
 
     def __init__(self):
-        pass
+        self.is_alive = True
+        self.death = "N/A"
     
     def set_ID(self, id: str):
         self.id = id
@@ -21,12 +22,10 @@ class Person:
         birthday_date = datetime.datetime.strptime(birthday, "%d %b %Y")
         age = today.year - birthday_date.year 
         self.age = age
-
-    def set_is_alive(self, is_alive: bool):
-        self.is_alive = is_alive
     
     def set_death(self, death: str):
         self.death = death
+        self.is_alive = False
     
     def set_is_child(self, is_child: bool):
         self.is_child = is_child
