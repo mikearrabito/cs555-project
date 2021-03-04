@@ -1,7 +1,7 @@
 class Person:
 
     def __init__(self):
-
+        pass
     
     def set_ID(self, id: str):
         self.id = id
