@@ -31,7 +31,11 @@ for line in f.readlines():
 for person in people:
     print(person.id, person.name)
 
-pt = PrettyTable()
-pt.field_names = ["ID, Name, Gender, Birthday, Age, Alive, Death, Child, Spouse"]
+pt1 = PrettyTable()
+
+pt1.field_names = ["ID, Name, Gender, Birthday, Age, Alive, Death, Child, Spouse"]
 for person in people:
-    pt.add_row(person.id, person.name, person.gender, person.birthday, person.age, peron.is_alive, perosn.death)
+    pt1.add_row(person.id, person.name, person.gender, person.birthday, person.age, person.is_alive, person.death)
+
+pt2 = PrettyTable()
+pt2.field_names = ["ID, Married, Divorced, Husband ID, Husband Name, Wife ID, Wife Name, Children"]
