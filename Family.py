@@ -7,5 +7,5 @@ class Family:
         self.id = id
         
     def add_member(self, Person):
-        family_members.append(Person)
+        self.family_members.append(Person)
 
