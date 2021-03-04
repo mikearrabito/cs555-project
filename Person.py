@@ -15,7 +15,7 @@ class Person:
     def set_birthday(self, birthday: str):
         self.birthday = birthday
 
-    def set_is_alive(self, isAlive: bool):
+    def set_is_alive(self, is_alive: bool):
         self.is_alive = is_alive
     
     def set_death(self, death: str):
