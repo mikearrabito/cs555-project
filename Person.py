@@ -9,6 +9,18 @@ class Person:
         self.spouse = []
         self.child = []
     
+    #returns True if date is before today
+    @staticmethod
+    def is_date_valid(str date){
+
+        date1 = datetime.datetime.strptime(date, "%d %b %Y")
+        if date1 < datetime.date.today(){
+            return True
+        }else{
+            return False
+        }
+    }
+
     def set_ID(self, id: str):
         self.id = id
     

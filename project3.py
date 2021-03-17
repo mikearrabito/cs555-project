@@ -46,13 +46,21 @@ for line in f.readlines():
         deat = True
 
     if line[1] == 'DATE' and birt:
-        dob = line[2]
-        new_person.set_birthday(dob)
+        #check if date is before today
+        if Person.is_date_valid(line[2]){
+            dob = line[2]
+            new_person.set_birthday(dob)
+        }
         birt = False
+        
 
     if line[1] == 'DATE' and deat:
-        date_of_death = line[2]
-        new_person.set_death(date_of_death)
+
+        #check if date is before today
+        if Person.is_date_valid(line[2]){
+            date_of_death = line[2]
+            new_person.set_death(date_of_death)
+        }
         deat = False
         
     if line[1] == 'FAMS':
