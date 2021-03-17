@@ -11,15 +11,15 @@ class Person:
     
     #returns True if date is before today
     @staticmethod
-    def is_date_valid(str date){
+    def is_date_valid(date: str):
 
         date1 = datetime.datetime.strptime(date, "%d %b %Y")
-        if date1 < datetime.date.today(){
+        if date1 < datetime.date.today():
             return True
-        }else{
+        else:
             return False
-        }
-    }
+        
+    
 
     def set_ID(self, id: str):
         self.id = id
@@ -37,6 +37,14 @@ class Person:
         age = today.year - birthday_date.year 
         self.age = age
     
+    def set_marriage_date(self, date: str):
+
+        if datetime.datetime.strptime(date, "%d %b %Y") > datetime.datetime.strptime(self.birthday, "%d %b %Y"):
+            self.marriage_date = date
+        
+
+
+
     def set_death(self, death: str):
         self.death = death
         self.is_alive = False

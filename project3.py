@@ -16,6 +16,8 @@ new_person = None
 new_family = None
 birt = False
 deat = False
+marr = False
+div = False
 
 for line in f.readlines():
     line = line.rstrip()
@@ -45,24 +47,47 @@ for line in f.readlines():
     if line[1] == 'DEAT':
         deat = True
 
+    if line[1] == 'MARR':
+        marr = True
+
+    if line[1] == "DIV":
+        div = True
+
     if line[1] == 'DATE' and birt:
         #check if date is before today
-        if Person.is_date_valid(line[2]){
+        if Person.Person.is_date_valid(line[2]):
             dob = line[2]
             new_person.set_birthday(dob)
-        }
+        
         birt = False
         
 
     if line[1] == 'DATE' and deat:
 
         #check if date is before today
-        if Person.is_date_valid(line[2]){
+        if Person.Person.is_date_valid(line[2]):
             date_of_death = line[2]
             new_person.set_death(date_of_death)
-        }
+        
         deat = False
         
+    if line[1] == 'DATE' and marr:
+        if Person.Person.is_date_valid(line[2]):
+            date_of_marriage = line[2]
+            new_family.set_marriage_date(date_of_marriage)
+            new_person.set_marriage_date(line[1])
+        
+        marr = False
+
+    if line[1] == 'DATE' and div:
+        if Person.Person.is_date_valid(line[2]):
+            date_of_divorce = line[2]
+            new_family.set_divorce_date(date_of_divorce)
+            new_family.divorced = True
+        
+        div = False
+
+    
     if line[1] == 'FAMS':
         new_person.set_spouse(line[2])
 
@@ -91,6 +116,9 @@ for line in f.readlines():
     if len(line) > 2 and line[1] == '_CURRENT':
         if line[2] == 'N':
             new_family.divorced = True
+
+
+
 
 for family in families:
     for person in people:

@@ -25,3 +25,9 @@ class Family:
     def add_child(self, child):
         self.children.append(child)
 
+    def set_marriage_date(self, date):
+        self.marriage_date = date
+
+    def set_divorced_date(self, date):
+        self.divorced_date = date
+
