@@ -14,7 +14,9 @@ class Person:
     def is_date_valid(date: str):
 
         date1 = datetime.datetime.strptime(date, "%d %b %Y")
-        if date1 < datetime.date.today():
+        today = datetime.datetime.today().date()
+        #today = datetime.date.today().strftime("%d %b %Y")
+        if date1.date() < today:
             return True
         else:
             return False
