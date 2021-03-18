@@ -48,8 +48,7 @@ class Person:
         age = today.year - birthday_date.year 
         self.age = age
         
-     """Marriage should occur before death of either spouse"""
-
+    """US05: Marriage should occur before death of either spouse"""
 
     def marriage_before_death(individual, family):
         for fam in family.values():
@@ -65,6 +64,25 @@ class Person:
                         yield f"Marriage date Line: {fam._line_numbers.get('date').get('marriage')}" \
                             f"\nDeath of wife date Line: {indi._line_numbers.get('date').get('death')}\n" \
                             f"The family {fam._family_id} has a death of wife {fam._wife_id} before the marriage date."
+                            
+                            
+    """ US06 : Divorce of the husband or wife must be before death date of the individual"""
+                       
+    def divorce_before_death(individual,family):
+        lst = []
+        for k, v in family.items():
+            if v._divorce_date != 'NA':
+                #get husband and wife ids death date
+                husband_death = individual[v._husband_id]._death_date
+                wife_death = individual[v._wife_id]._death_date
+
+                if husband_death != 'NA' and husband_death < v._divorce_date:
+                    lst.append(f"US_06: {v._husband_name} Death {husband_death} occured prior to the divorce date {v._divorce_date}")
+
+                elif wife_death != 'NA' and wife_death < v._divorce_date:
+                    lst.append(f"US_06: {v._wife_name} Death {wife_death} occured prior to the divorce date {v._divorced}")
+
+        return lst
                             
 
     def set_marriage_date(self, date: str):
