@@ -41,7 +41,7 @@ class Person:
         birthday_date = datetime.datetime.strptime(birthday, "%d %b %Y")
         if self.death != 'N/A':
             # if person is dead, make sure dob is not after death date
-            if self.birthday_date > self.death:
+            if birthday_date > self.death:
                 self.birthday = 'Invalid date'
                 return
         age = today.year - birthday_date.year 
