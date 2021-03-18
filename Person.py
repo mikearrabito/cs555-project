@@ -104,7 +104,9 @@ class Person:
                 if datetime.datetime.strptime(date, "%d %b %Y") > datetime.datetime.strptime(self.marriage_date,
                                                                                              "%d %b %Y"):
                     # check if divorce date is after marriage date
-                    self.marriage_date = date
+                    self.divorce_date = date
+                else:
+                    self.divorce_date = 'Invalid date'
             else:
                 # marriage date not added yet, so add divorce date
                 self.divorce_date = date
