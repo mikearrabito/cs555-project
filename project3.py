@@ -58,6 +58,8 @@ for line in f.readlines():
         if Person.Person.is_date_valid(line[2]):
             dob = line[2]
             new_person.set_birthday(dob)
+        else:
+            print(f"Error US01: Birth date of {new_person.name} occurs after the current date.")
         
         birt = False
         
@@ -68,7 +70,8 @@ for line in f.readlines():
         if Person.Person.is_date_valid(line[2]):
             date_of_death = line[2]
             new_person.set_death(date_of_death)
-        
+        else:
+            print(f"Error US01: Death date of {new_person.name} occurs after the current date.")
         deat = False
         
     if line[1] == 'DATE' and marr:
@@ -76,7 +79,8 @@ for line in f.readlines():
             date_of_marriage = line[2]
             new_family.set_marriage_date(date_of_marriage)
             new_person.set_marriage_date(line[1])
-        
+        else:
+            print(f"Error US01: Marriage date of {new_person.name} occurs after the current date.")
         marr = False
 
     if line[1] == 'DATE' and div:
@@ -84,7 +88,8 @@ for line in f.readlines():
             date_of_divorce = line[2]
             new_family.set_divorce_date(date_of_divorce)
             new_family.divorced = True
-        
+        else:
+            print(f"Error US01: Divorce date of {new_person.name} occurs after the current date.")
         div = False
 
     

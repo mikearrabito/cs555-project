@@ -23,6 +23,7 @@ class Person:
             return True
         else:
             return False
+            
         
     
 
@@ -57,6 +58,8 @@ class Person:
             else:
                 # divorce date not added yet, so add marriage date
                 self.marriage_date = date
+        else:
+            print(f"Error US02: Marriage date of {self.name} occurs before their birth date.")
 
     def set_divorce_date(self, date: str):
         if datetime.datetime.strptime(date, "%d %b %Y") > datetime.datetime.strptime(self.birthday, "%d %b %Y"):
