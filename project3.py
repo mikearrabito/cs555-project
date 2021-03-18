@@ -118,7 +118,8 @@ for line in f.readlines():
             new_family.divorced = True
 
 
-
+if new_family:
+    families.append(new_family)
 
 for family in families:
     for person in people:
@@ -129,7 +130,7 @@ for family in families:
 
 pt1 = PrettyTable()
 
-pt1.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death","Child", "Spouse"]
+pt1.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
 for person in people:
     pt1.add_row([person.id, person.name, person.gender, person.birthday, person.age, person.is_alive, person.death, person.child, person.spouse])
 print(pt1)
