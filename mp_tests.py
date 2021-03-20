@@ -18,9 +18,9 @@ class PersonTest(unittest.TestCase):
         person1.set_birthday("1 JAN 1997")
         person1.set_marriage_date("10 MAY 2020")
         person1.set_divorce_date("10 JUN 2020")
-        self.assertEquals(person1.divorce_date, "10 JUN 2020")
+        self.assertEqual(person1.divorce_date, "10 JUN 2020")
         person1.set_divorce_date("10 APR 2020")
-        self.assertEquals(person1.divorce_date, "Invalid date")
+        self.assertEqual(person1.divorce_date, "Invalid date")
         return
 
 
