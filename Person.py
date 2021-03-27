@@ -11,6 +11,9 @@ class Person:
         self.child = []
         self.divorce_date = None
         self.marriage_date = None
+
+    def __str__(self):
+        return self.id
     
     #returns True if date is before today
     @staticmethod
@@ -23,8 +26,8 @@ class Person:
             return True
         else:
             return False
-            
-        
+    
+
     
 
     def set_ID(self, id: str):

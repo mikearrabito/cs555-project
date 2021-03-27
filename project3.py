@@ -92,7 +92,7 @@ for line in f.readlines():
             print(f"Error US01: Divorce date of {new_person.name} occurs after the current date.")
         div = False
 
-    
+
     if line[1] == 'FAMS':
         new_person.set_spouse(line[2])
 
@@ -133,6 +133,13 @@ for family in families:
         elif family.husband == person.id:
             family.add_husband(person)
 
+for family in families:
+    for i in range(0, len(family.children)):
+        for person in people:
+            if family.children[i] == person.id:
+                family.children[i] = person
+
+
 pt1 = PrettyTable()
 
 pt1.field_names = ["ID", "Name", "Gender", "Birthday", "Age", "Alive", "Death", "Child", "Spouse"]
@@ -143,6 +150,5 @@ print(pt1)
 pt2 = PrettyTable()
 pt2.field_names = ["ID", "Husband ID", "Husband Name", "Wife ID", "Wife Name", "Children"]
 for family in families:
-
-    pt2.add_row([family.id, family.husband.id, family.husband.name, family.wife.id, family.wife.name, family.children])
+    pt2.add_row([family.id, family.husband.id, family.husband.name, family.wife.id, family.wife.name, family.get_children_ids()])
 print(pt2)
