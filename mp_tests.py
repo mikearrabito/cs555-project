@@ -1,5 +1,6 @@
 from Person import Person
 import unittest
+from Family import Family
 
 class PersonTest(unittest.TestCase):
 
@@ -22,6 +23,43 @@ class PersonTest(unittest.TestCase):
         person1.set_divorce_date("10 APR 2020")
         self.assertEqual(person1.divorce_date, "Invalid date")
         return
+
+    def test_is_birth_before_death_of_parents(self):
+        wife = Person()
+        wife.set_birthday("1 JAN 1910")
+        wife.name = "Kim"
+        wife.set_death("16 MAR 1952")
+        child = Person()
+        child.name = "Sally"
+        child.set_birthday("17 MAR 1952")
+        family = Family("1")
+        family.wife = wife
+        family.add_child(child)
+        self.assertFalse(family.is_birth_before_death_of_parents())
+        husband = Person()
+        husband.set_birthday("1 JAN 1910")
+        husband.name = "Joe"
+        husband.set_death("5 JAN 1952")
+        family.add_husband(husband)
+        family.wife.set_death("10 MAR 1970")
+        self.assertTrue(family.is_birth_before_death_of_parents())
+        family.husband.set_death("5 APR 1951")
+        self.assertFalse(family.is_birth_before_death_of_parents())
+
+    def test_is_marriage_fourteen_years_after_parents_birth(self):
+        wife = Person()
+        wife.set_birthday("1 JAN 1910")
+        wife.name = "Kim"
+        husband = Person()
+        husband.set_birthday("1 JAN 1910")
+        husband.name = "Joe"
+        family = Family("1")
+        family.husband = husband
+        family.wife = wife
+        family.set_marriage_date("1 JAN 1923")
+        self.assertFalse(family.is_marriage_fourteen_years_after_parents_birth())
+        family.set_marriage_date("1 JAN 1925")
+        self.assertTrue(family.is_marriage_fourteen_years_after_parents_birth())
 
 
 if __name__ == '__main__':

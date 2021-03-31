@@ -139,6 +139,9 @@ for family in families:
             if family.children[i] == person.id:
                 family.children[i] = person
 
+for family in families:
+    family.is_birth_before_death_of_parents()
+    family.is_marriage_fourteen_years_after_parents_birth()
 
 pt1 = PrettyTable()
 
