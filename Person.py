@@ -87,7 +87,56 @@ class Person:
 
         return lst
                             
+    """US07 Checks to make sure that an individual is less than 150 years old"""
+    
+    def age_less_than_150(individuals):
 
+        flag = True
+        output = ""
+        for individual in individuals.values():
+            if individual.alive:
+    
+                if individual.age > 150:
+                    flag = False
+                    output += "Error: " + \
+                        str(individual.ID) + " is more than 150 years old.\n"
+        if flag:
+            output += "All individuals are less than 150 years old.\n"
+        return (flag, output)
+    
+    
+    """US08 Birth before marriage of parents"""
+    
+    def birth_before_marriage(individuals, families):
+        for fam in families:
+            wife = " ".join(families[fam]["WIFE"])
+            husband = " ".join(families[fam]["HUSB"])
+            if families[fam]["CHIL"] != []:
+                children = families[fam]["CHIL"]
+            else:
+                continue
+            for child in children:
+                if individuals[child]["BIRT"] < families[fam]["MARR"]:
+                    print(
+                        "Error: US08: {} and {} married on {}, so {} cannot be born on {}".format(
+                            husband,
+                            wife,
+                            families[fam]["MARR"].strftime("%Y-%m-%d"),
+                            child,
+                            individuals[child]["BIRT"].strftime("%Y-%m-%d"),
+                        )
+                    )
+                if families[fam]["DIV"] != "" and individuals[child]["BIRT"] > families[fam]["DIV"] + datetime.timedelta(6 * 365 / 12):
+                    print("Error: US08: {} and {} divorced on {}, so {} cannot be born on {}".format(
+                            husband,
+                            wife,
+                            families[fam]["DIV"].strftime("%Y-%m-%d"),
+                            child,
+                            individuals[child]["BIRT"].strftime("%Y-%m-%d")))
+        return True
+
+    
+    
     def set_marriage_date(self, date: str):
         if datetime.datetime.strptime(date, "%d %b %Y") > datetime.datetime.strptime(self.birthday, "%d %b %Y"):
             if self.divorce_date:
@@ -123,6 +172,39 @@ class Person:
         else:
             pass  # death is before date of birth
 
+    
+    """US 15: Fewer than 15 siblings"""
+    def fewerThanFifteen(families):
+        for fam in families:
+            if (len(families[fam]["CHIL"])>=15):
+                print("Error: US15: Family {} cannot have 15 or more children.".format(fam))
+        return True
+    
+    """US16"""
+    def checkMaleLastNames(individuals):
+        familyNames = {}
+        for indi in individuals:
+            if " ".join(individuals[indi]["SEX"]) == "F":
+                continue
+            lastName = individuals[indi]["NAME"][1][1:-1]
+            if " ".join(individuals[indi]["FAMS"]) == "":
+                family = " ".join(individuals[indi]["FAMC"])
+            else:
+                family = " ".join(individuals[indi]["FAMS"])
+            try:
+                if lastName == familyNames[family]:
+                    continue
+                else:
+                    print(
+                        "Error: US16: Last name of {} does not match family last name of {}".format(
+                            indi, family
+                        )
+                    )
+            except KeyError as ke:
+                familyNames[family] = lastName
+        return familyNames
+    
+    
     
     def set_is_child(self, is_child: bool):
         self.is_child = is_child
