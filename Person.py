@@ -173,52 +173,52 @@ class Person:
             pass  # death is before date of birth
         
     def US_13(family_object, individual_object):
-    """ To check if the sibiling are twins """
-    warnings = set()
-    for attribute in family_object.values():    
-        child = list(attribute._children)
-        if child != ['N','A']:
-            for i in range(0, len(child)):          
-                for j in range(i + 1, len(child)):
-                    person_one_id = child[i] 
-                    person_two_id = child[j]
+        """ To check if the sibiling are twins """
+        warnings = set()
+        for attribute in family_object.values():    
+            child = list(attribute._children)
+            if child != ['N','A']:
+                for i in range(0, len(child)):          
+                    for j in range(i + 1, len(child)):
+                        person_one_id = child[i] 
+                        person_two_id = child[j]
 
-                    date_one = individual_object[person_one_id]._birth_date
-                    date_two = individual_object[person_two_id]._birth_date
-                    try:
-                        difference = date_one - date_two
-                    except:
-                        continue
-                    if date_one < date_two:
-                        difference = date_two - date_one
+                        date_one = individual_object[person_one_id]._birth_date
+                        date_two = individual_object[person_two_id]._birth_date
+                        try:
+                            difference = date_one - date_two
+                        except:
+                            continue
+                        if date_one < date_two:
+                            difference = date_two - date_one
 
-                    if difference > datetime.timedelta(days=2) and difference < datetime.timedelta(days=240):
-                        a = sorted([person_one_id, person_two_id])
-                        warnings.add(f"The family id {attribute._family_id} has twins {individual_object[a[0]]._name} and {individual_object[a[1]]._name}, Line number: {attribute.get_line_numbers()['family_id']}")
-        child = []       
-    return warnings   
+                        if difference > datetime.timedelta(days=2) and difference < datetime.timedelta(days=240):
+                            a = sorted([person_one_id, person_two_id])
+                            warnings.add(f"The family id {attribute._family_id} has twins {individual_object[a[0]]._name} and {individual_object[a[1]]._name}, Line number: {attribute.get_line_numbers()['family_id']}")
+            child = []       
+        return warnings   
                              
     def US_14(individual, family):
-    '''No more than five siblings should be born at the same time '''
+        '''No more than five siblings should be born at the same time '''
 
-    y = []
-    b, n = 0, 0
-    for k, v in family.items():
-        # fam_result.extend(fam_result)
-        child_bday = defaultdict(int)
-        if len(v._children) >= 5:
-            if v._children != 'NA':
-                for child in [individual[c] for c in v._children]:
-                    child_bday[child._birth_date] += 1
-                    for b_date, no in child_bday.items():
-                        if no >= 5:
-                            # y.append(b_date)
-                            b = b_date
-    if v._children != 'NA':
-        output = f"US14: {k} has more than 5 children born on same date {b} in line number {family[k].get_line_numbers()['family_id']}"
-        y.append(output)
+        y = []
+        b, n = 0, 0
+        for k, v in family.items():
+            # fam_result.extend(fam_result)
+            child_bday = defaultdict(int)
+            if len(v._children) >= 5:
+                if v._children != 'NA':
+                    for child in [individual[c] for c in v._children]:
+                        child_bday[child._birth_date] += 1
+                        for b_date, no in child_bday.items():
+                            if no >= 5:
+                                # y.append(b_date)
+                                b = b_date
+        if v._children != 'NA':
+            output = f"US14: {k} has more than 5 children born on same date {b} in line number {family[k].get_line_numbers()['family_id']}"
+            y.append(output)
 
-    return y
+        return y
 
     
     """US 15: Fewer than 15 siblings"""

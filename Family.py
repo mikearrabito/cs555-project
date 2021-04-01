@@ -13,6 +13,7 @@ class Family:
         self.wife = None
         self.family_members = list()
         self.divorced = False
+        self.marriage_date = None
 
     def add_member(self, person):
         self.family_members.append(person)
@@ -55,6 +56,8 @@ class Family:
         return True
 
     def is_marriage_fourteen_years_after_parents_birth(self):
+        if self.marriage_date == None:
+            return True
         marriage_date = datetime.datetime.strptime(self.marriage_date, "%d %b %Y") - relativedelta(years=+14)
         if datetime.datetime.strptime(self.husband.birthday, "%d %b %Y") > marriage_date:
             print(f"Error US10: {self.husband.name} is not at least 14 years old at time of marriage")
