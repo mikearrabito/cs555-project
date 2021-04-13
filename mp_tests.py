@@ -61,6 +61,18 @@ class PersonTest(unittest.TestCase):
         family.set_marriage_date("1 JAN 1925")
         self.assertTrue(family.is_marriage_fourteen_years_after_parents_birth())
 
+    def test_children_married_to_each_other(self):
+        kid1 = Person()
+        kid1.id = "@02@"
+        kid1.spouse = "@01@"
+        kid2 = Person()
+        kid2.id = "@01@"
+        family = Family("@f1@")
+        family.add_child(kid1)
+        family.add_child(kid2)
+        self.assertTrue(family.children_married_to_each_other())
+        kid1.spouse = "@05@"
+        self.assertFalse(family.children_married_to_each_other())
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)

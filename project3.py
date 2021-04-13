@@ -142,6 +142,7 @@ for family in families:
 for family in families:
     family.is_birth_before_death_of_parents()
     family.is_marriage_fourteen_years_after_parents_birth()
+    family.children_married_to_each_other()
 
 pt1 = PrettyTable()
 

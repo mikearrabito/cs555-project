@@ -67,4 +67,11 @@ class Family:
             return False
         return True
 
-    
+    def children_married_to_each_other(self):
+        for child in self.children:
+            for other in self.children:
+                if child.spouse == other.id:
+                    print(f"Error US10: {child} is married to sibling {other}")
+                    return True
+        return False
+        
