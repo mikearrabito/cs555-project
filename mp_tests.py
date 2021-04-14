@@ -74,5 +74,21 @@ class PersonTest(unittest.TestCase):
         kid1.spouse = "@05@"
         self.assertFalse(family.children_married_to_each_other())
 
+    def test_parents_married_to_children(self):
+        kid1 = Person()
+        kid1.set_ID("@02@")
+        kid1.spouse = "@01@"
+        family = Family("@f1@")
+        family.add_child(kid1)
+        wife = Person()
+        wife.spouse= "@02@"
+        wife.set_ID("05")
+        family.wife = wife
+        husband = Person()
+        husband.set_spouse("05")
+        family.husband = husband
+        self.assertTrue(family.parents_married_to_children())
+
+
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)

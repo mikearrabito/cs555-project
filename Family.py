@@ -71,7 +71,17 @@ class Family:
         for child in self.children:
             for other in self.children:
                 if child.spouse == other.id:
-                    print(f"Error US10: {child} is married to sibling {other}")
+                    print(f"Error US18: {child} is married to sibling {other}")
                     return True
         return False
         
+    def parents_married_to_children(self):
+        for child in self.children:
+            if self.husband.spouse == child.id:
+                print(f"Error US17: {self.husband} is married to child {child}")
+                return True
+            if self.wife.spouse == child.id:
+                print(f"Error US17: {self.wife} is married to child {child}")
+                return True
+        return False
+
