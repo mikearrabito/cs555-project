@@ -251,7 +251,37 @@ class Person:
             except KeyError as ke:
                 familyNames[family] = lastName
         return familyNames
+        
+        
+    """US23"""
+    def uniqueDOBandName(individuals):
+        allUnique = True
+        unique = set()
+        for indi in individuals:
+            nameDOB = " ".join(individuals[indi]["NAME"]) + individuals[indi]["BIRT"].strftime("%Y-%m-%d")
+            if nameDOB in unique:
+                allUnique = False
+                print("Error: US23: Individual {} does not have a unique DOB and Name".format(indi))
+            else:
+                unique.add(nameDOB)
+        return allUnique
     
+    
+    """US24"""
+    def unique_family_by_spouses(families):
+
+        flag = True
+        output = ""
+        couples = [(fam.wife_name, fam.husband_name, fam.married)
+                for fam in families]
+        dup_couples = [fam for fam, count in Counter(couples).items() if count > 1]
+        if len(dup_couples) > 0:
+            flag = False
+            for c in dup_couples:
+                output += "Error: " + str(c) + " appear in multiple families\n"
+        if flag:
+            output += "All families have unique wife name, husband name, and marriage date\n"
+        return (flag, output)
     
     
     def set_is_child(self, is_child: bool):
