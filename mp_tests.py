@@ -89,6 +89,19 @@ class PersonTest(unittest.TestCase):
         family.husband = husband
         self.assertTrue(family.parents_married_to_children())
 
+    def test_kids_have_same_name(self):
+        kid1 = Person()
+        kid1.set_name("Joe")
+        kid1.set_birthday("1 JAN 1923")
+        kid2 = Person()
+        kid2.set_name("Joe")
+        kid2.set_birthday("1 JAN 1923")
+        family = Family("id")
+        family.add_child(kid1)
+        family.add_child(kid2)
+        self.assertFalse(family.kids_have_same_name())
+        kid2.name = "Bill"
+        self.assertTrue(family.kids_have_same_name())
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)

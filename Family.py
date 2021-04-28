@@ -85,3 +85,18 @@ class Family:
                 return True
         return False
 
+    def kids_have_same_name(self):
+        same_name = 0
+
+        for child in self.children:
+            for child1 in self.children:
+                if child.name == child1.name and child.birthday == child1.birthday:
+                    same_name += 1;
+            if same_name >= 2:
+                print(f"Error US25: Two kids with the same name and birthdate.")
+                return False
+            same_name = 0
+        
+        return True
+
+    
