@@ -284,6 +284,31 @@ class Person:
         if flag:
             output += "All families have unique wife name, husband name, and marriage date\n"
         return (flag, output)
+        
+        
+    """US31"""
+    def living_single(individuals):
+    """US 31: Living single
+        Args:
+        individuals (list): A list of inidividuals
+        Returns:
+        Output is a string that lists all individuals who single and over 30.
+    """
+    flag = True
+    output = ""
+    for i in individuals:
+        if(i.age > 30 and len(i.spouse) == 0):
+            flag = False
+            output += str(i) + " is single and over 30.\n"
+    if flag:
+        output += "No one is single and over 30.\n"
+    return (flag, output)
+    
+    
+    """US32"""
+
+    
+   
     
     
     def set_is_child(self, is_child: bool):
