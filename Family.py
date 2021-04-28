@@ -91,7 +91,7 @@ class Family:
         for child in self.children:
             for child1 in self.children:
                 if child.name == child1.name and child.birthday == child1.birthday:
-                    same_name += 1;
+                    same_name += 1
             if same_name >= 2:
                 print(f"Error US25: Two kids with the same name and birthdate.")
                 return False

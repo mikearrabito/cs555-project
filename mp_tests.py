@@ -102,6 +102,7 @@ class PersonTest(unittest.TestCase):
         self.assertFalse(family.kids_have_same_name())
         kid2.name = "Bill"
         self.assertTrue(family.kids_have_same_name())
+        
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)

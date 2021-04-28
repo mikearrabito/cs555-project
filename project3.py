@@ -126,6 +126,27 @@ for line in f.readlines():
 if new_family:
     families.append(new_family)
 
+"""US 26"""
+def corresponding_entries(people: [Person], families: [Family]):
+    for person in people:
+        if person.is_child:
+            for family in families:
+                for fam in person.child:
+                    if family.id == fam:
+                        return True
+            print(f"Error US26: entries for person and family do not correspond.")
+            return False
+        elif person.has_spouse:
+            for family in families:
+                for fam in person.spouse:
+                    if family.wife == fam or family.husband == fam:
+                        return True
+            print(f"Error US26: entries for person and family do not correspond.")
+            return False
+    return True
+
+corresponding_entries(people, families)
+
 for family in families:
     for person in people:
         if family.wife == person.id:

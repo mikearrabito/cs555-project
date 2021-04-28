@@ -1,4 +1,5 @@
 import datetime
+from typing import Dict, DefaultDict
 
 class Person:
     
@@ -11,6 +12,7 @@ class Person:
         self.child = []
         self.divorce_date = None
         self.marriage_date = None
+        
 
     def __str__(self):
         return self.id
@@ -53,7 +55,7 @@ class Person:
         
     """US05: Marriage should occur before death of either spouse"""
 
-    def marriage_before_death(individual, family):
+    def marriage_before_death(self, individual, family):
         for fam in family.values():
             married = fam._marriage_date
             for indi in individual.values():
@@ -71,7 +73,7 @@ class Person:
                             
     """ US06 : Divorce of the husband or wife must be before death date of the individual"""
                        
-    def divorce_before_death(individual,family):
+    def divorce_before_death(self, individual,family):
         lst = []
         for k, v in family.items():
             if v._divorce_date != 'NA':
@@ -89,7 +91,7 @@ class Person:
                             
     """US07 Checks to make sure that an individual is less than 150 years old"""
     
-    def age_less_than_150(individuals):
+    def age_less_than_150(self, individuals):
 
         flag = True
         output = ""
@@ -107,7 +109,7 @@ class Person:
     
     """US08 Birth before marriage of parents"""
     
-    def birth_before_marriage(individuals, families):
+    def birth_before_marriage(self, individuals, families):
         for fam in families:
             wife = " ".join(families[fam]["WIFE"])
             husband = " ".join(families[fam]["HUSB"])
@@ -172,7 +174,7 @@ class Person:
         else:
             pass  # death is before date of birth
         
-    def US_13(family_object, individual_object):
+    def US_13(self, family_object, individual_object):
         """ To check if the sibiling are twins """
         warnings = set()
         for attribute in family_object.values():    
@@ -198,14 +200,14 @@ class Person:
             child = []       
         return warnings   
                              
-    def US_14(individual, family):
+    def US_14(self, individual, family):
         '''No more than five siblings should be born at the same time '''
 
         y = []
         b, n = 0, 0
         for k, v in family.items():
             # fam_result.extend(fam_result)
-            child_bday = defaultdict(int)
+            child_bday = DefaultDict(int)
             if len(v._children) >= 5:
                 if v._children != 'NA':
                     for child in [individual[c] for c in v._children]:
@@ -287,6 +289,20 @@ class Person:
     def set_is_child(self, is_child: bool):
         self.is_child = is_child
     
+    def is_child(self):
+        if self.child ==[]:
+            return False
+        else:
+            return True
+
+    def has_spouse(self):
+        if self.spouse == []:
+            return False
+        else:
+            return True
+
+
+
     def set_spouse(self, spouse):
         self.spouse.append(spouse)
 
