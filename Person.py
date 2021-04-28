@@ -91,11 +91,11 @@ class Person:
                             
     """US07 Checks to make sure that an individual is less than 150 years old"""
     
-    def age_less_than_150(self, individuals):
+    def age_less_than_150(self, individual):
 
         flag = True
         output = ""
-        for individual in individuals.values():
+        for individual in individual.values():
             if individual.alive:
     
                 if individual.age > 150:
@@ -103,13 +103,13 @@ class Person:
                     output += "Error: " + \
                         str(individual.ID) + " is more than 150 years old.\n"
         if flag:
-            output += "All individuals are less than 150 years old.\n"
+            output += "All individual are less than 150 years old.\n"
         return (flag, output)
     
     
     """US08 Birth before marriage of parents"""
     
-    def birth_before_marriage(self, individuals, families):
+    def birth_before_marriage(self, individual, families):
         for fam in families:
             wife = " ".join(families[fam]["WIFE"])
             husband = " ".join(families[fam]["HUSB"])
@@ -118,23 +118,23 @@ class Person:
             else:
                 continue
             for child in children:
-                if individuals[child]["BIRT"] < families[fam]["MARR"]:
+                if individual[child]["BIRT"] < families[fam]["MARR"]:
                     print(
                         "Error: US08: {} and {} married on {}, so {} cannot be born on {}".format(
                             husband,
                             wife,
                             families[fam]["MARR"].strftime("%Y-%m-%d"),
                             child,
-                            individuals[child]["BIRT"].strftime("%Y-%m-%d"),
+                            individual[child]["BIRT"].strftime("%Y-%m-%d"),
                         )
                     )
-                if families[fam]["DIV"] != "" and individuals[child]["BIRT"] > families[fam]["DIV"] + datetime.timedelta(6 * 365 / 12):
+                if families[fam]["DIV"] != "" and individual[child]["BIRT"] > families[fam]["DIV"] + datetime.timedelta(6 * 365 / 12):
                     print("Error: US08: {} and {} divorced on {}, so {} cannot be born on {}".format(
                             husband,
                             wife,
                             families[fam]["DIV"].strftime("%Y-%m-%d"),
                             child,
-                            individuals[child]["BIRT"].strftime("%Y-%m-%d")))
+                            individual[child]["BIRT"].strftime("%Y-%m-%d")))
         return True
 
     
@@ -231,16 +231,16 @@ class Person:
         return True
     
     """US16"""
-    def checkMaleLastNames(individuals):
+    def checkMaleLastNames(individual):
         familyNames = {}
-        for indi in individuals:
-            if " ".join(individuals[indi]["SEX"]) == "F":
+        for indi in individual:
+            if " ".join(individual[indi]["SEX"]) == "F":
                 continue
-            lastName = individuals[indi]["NAME"][1][1:-1]
-            if " ".join(individuals[indi]["FAMS"]) == "":
-                family = " ".join(individuals[indi]["FAMC"])
+            lastName = individual[indi]["NAME"][1][1:-1]
+            if " ".join(individual[indi]["FAMS"]) == "":
+                family = " ".join(individual[indi]["FAMC"])
             else:
-                family = " ".join(individuals[indi]["FAMS"])
+                family = " ".join(individual[indi]["FAMS"])
             try:
                 if lastName == familyNames[family]:
                     continue
@@ -256,11 +256,11 @@ class Person:
         
         
     """US23"""
-    def uniqueDOBandName(individuals):
+    def uniqueDOBandName(individual):
         allUnique = True
         unique = set()
-        for indi in individuals:
-            nameDOB = " ".join(individuals[indi]["NAME"]) + individuals[indi]["BIRT"].strftime("%Y-%m-%d")
+        for indi in individual:
+            nameDOB = " ".join(individual[indi]["NAME"]) + individual[indi]["BIRT"].strftime("%Y-%m-%d")
             if nameDOB in unique:
                 allUnique = False
                 print("Error: US23: Individual {} does not have a unique DOB and Name".format(indi))
@@ -287,7 +287,7 @@ class Person:
         
         
     """US31"""
-    def living_single(self, individuals):
+    def living_single(self, individual):
     """US 31: Living single
         Args:
         individuals (list): A list of inidividuals
@@ -306,7 +306,7 @@ class Person:
     
     
     """US35"""
-    def list_recent_births(self, individuals):
+    def list_recent_births(self, individual):
     """US 35: List recent births
     Args:
         individuals (list): A list of inidividuals
@@ -316,7 +316,7 @@ class Person:
     flag = True
     output = ""
     today = datetime.now()
-    for indi in individuals:
+    for indi in individual:
         # parse birthday into datetime
         born = datetime.strptime(indi.birthday, "%d %b %Y")
         # get difference
