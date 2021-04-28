@@ -287,7 +287,7 @@ class Person:
         
         
     """US31"""
-    def living_single(individuals):
+    def living_single(self, individuals):
     """US 31: Living single
         Args:
         individuals (list): A list of inidividuals
@@ -305,9 +305,33 @@ class Person:
     return (flag, output)
     
     
-    """US32"""
+    """US35"""
+    def list_recent_births(self, individuals):
+    """US 35: List recent births
+    Args:
+        individuals (list): A list of inidividuals
+    Returns:
+         Output is a string that describes which individuals were born in the last 30 days
+    """
+    flag = True
+    output = ""
+    today = datetime.now()
+    for indi in individuals:
+        # parse birthday into datetime
+        born = datetime.strptime(indi.birthday, "%d %b %Y")
+        # get difference
+        delta = today - born
 
-    
+        # also need to make sure the baby isnt born in the future
+        if delta.days <= 30 and delta.days >= 0:
+            flag = False
+            output += str(indi) + " was born within the last 30 days\n"
+
+    if flag:
+        output = "No individuals born in the last 30 days\n"
+
+    return (flag, output)
+   
    
     
     
