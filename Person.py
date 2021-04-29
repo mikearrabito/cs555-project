@@ -390,10 +390,23 @@ class Person:
         output = "No individuals born in the last 30 days\n"
 
     return (flag, output)
-   
-   
-    
-    
+
+    """US 36 Recent deaths"""
+    def list_recent_deaths(self, people):
+        result = list()
+        today = datetime.now()
+        for person in people:
+            if person.death is None or person.death == "N/A":
+                continue # person is still alive, continue to next person
+            death_date = datetime.strptime(person.death, "%d %b %Y")
+            difference = today - death_date
+            if 30 >= difference.days >= 0:
+                print(person + " has died within last 30 days.")
+                result.append(person)
+
+        return result
+
+
     def set_is_child(self, is_child: bool):
         self.is_child = is_child
     
