@@ -31,7 +31,22 @@ class Family:
         self.wife = wife
 
     def add_child(self, child):
-        
+        """US 12 Mother should be less than 60 years older than her children and
+                 father should be less than 80 years older than his children"""
+        mother_limit = None
+        father_limit = None
+        if wife.age:
+            mother_limit = wife.age
+        if father.age:
+            father_limit = father.age
+        if mother_limit:
+            if child.age and (mother_limit - 60) > child.age:
+                print("Mother is too old to add this child")
+                return
+        if father_limit:
+            if child.age and (father_limit - 80) > child.age:
+                print("Father is too old to add this child")
+                return
         self.children.append(child)
         
 

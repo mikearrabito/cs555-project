@@ -126,6 +126,38 @@ for line in f.readlines():
 if new_family:
     families.append(new_family)
 
+"""us28 - List siblings in families by decreasing age, i.e. oldest siblings first"""
+# For each family, sort children by age, descending
+def sort_children_in_families(families_list):
+    sorted_children = list()
+    for family in families_list:
+        children_in_family = list()
+        children_in_family = family.get_children_ids()
+        if len(children_in_family) < 2:
+            return
+        for child_id in children_in_family:
+            for per in people:
+                if str(per) == child_id:
+                    if per.age:
+                        sorted_children.append((child_id, per.age))  # append ID, and age as tuple to list
+                    else:
+                        # if age is undefined, append to bottom as a default case
+                        sorted_children.append((child_id, -1))  # -1 to ensure sorts to bottom
+        # sorted_children contains ID and age for each
+        # sort by age then return only ID as new children list for family
+        sorted_children.sort(key=lambda x: x[1])
+        final_list = list()
+        for (c_id, age) in sorted_children:
+            final_list.append(c_id)
+        if len(final_list) == len(children_in_family):
+            # to catch edge case errors
+            family.children = final_list
+    return
+
+
+sort_children_in_families(families)
+
+
 """US 26"""
 def corresponding_entries(people: [Person], families: [Family]):
     for person in people:

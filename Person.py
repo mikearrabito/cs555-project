@@ -5,6 +5,7 @@ class Person:
     
 
     def __init__(self):
+        self.age = None
         self.is_alive = True
         self.birthday = None
         self.death = "N/A"
@@ -411,6 +412,12 @@ class Person:
 
 
     def set_spouse(self, spouse):
+        """US 11 Marriage should not occur during marriage to another spouse"""
+        # check when we are adding a spouse, if there is currently a spouse, ensure there is a divorce date first
+        if len(self.spouse) > 0:
+            if self.divorce_date is None:
+                print("Can not remarry while currently married")
+                return
         self.spouse.append(spouse)
 
     def set_fam(self, fam: str):

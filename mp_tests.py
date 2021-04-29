@@ -102,7 +102,36 @@ class PersonTest(unittest.TestCase):
         self.assertFalse(family.kids_have_same_name())
         kid2.name = "Bill"
         self.assertTrue(family.kids_have_same_name())
-        
+
+    def test_no_bigamy(self):
+        """US 11 Marriage should not occur during marriage to another spouse"""
+        wife = Person()
+        husband = Person()
+        husband.set_ID("First")
+        new_husband = Person()
+        new_husband.set_ID("New")
+        wife.set_spouse(husband.id)  # first marriage
+        wife.set_spouse(new_husband.id)  # new marriage, with first already done, should not change from first
+        self.assertEqual(wife.spouse, "First")  # should not have changed to New
+        return
+
+    def test_parents_not_too_old(self):
+        """US 12 Mother should be less than 60 years older than her children and
+         father should be less than 80 years older than his children"""
+        mother = Person()
+        father = Person()
+        mother.age = 80
+        father.age = 100
+        test_fam = Family()
+        test_fam.add_wife(mother)
+        test_fam.add_husband(father)
+        child = Person()
+        child.age = 2
+        test_fam.add_child(child)  # should not work since we break the age limit for mother
+        child.age = 22
+        test_fam.add_child(child)  # should not work since we break the age limit for father
+        self.assertTrue(len(test_fam.children) == 0)
+        return
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)
