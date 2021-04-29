@@ -253,8 +253,48 @@ class Person:
             except KeyError as ke:
                 familyNames[family] = lastName
         return familyNames
-        
-        
+    
+                                         
+    """US_21: checks the correct gender of husband and wife"""                                     
+    def US_21(individual, family):
+    
+    warnings = list()
+    for family in family.values():
+        if family._marriage_date != 'NA':
+            if family._husband_id != 'NA':
+                if individual[family._husband_id]._gender != 'NA':
+                    if individual[family._husband_id]._gender != 'M':
+                        warnings.append(f'US_21: {individual[family._husband_id]._name} gender is supposed to be male but is not on line number {individual[family._husband_id]._line_numbers["gender"]}')
+
+            if family._wife_id != 'NA':
+                if individual[family._wife_id]._gender != 'NA':
+                    if individual[family._wife_id]._gender != 'F':
+                        warnings.append(f'US_21: {individual[family._wife_id]._name} gender is supposed to be female but is not on line number {individual[family._wife_id]._line_numbers["gender"]}')
+
+    return warnings  
+                                        
+    """ US_22: checks if the individual ids are unique"""
+    def US_22(individual, family):
+    
+    i = []
+    warning = []
+
+    for item in individual.keys():
+        if item in i:
+            warning.append(f'US22: {item} id has a duplicate in line number {individual[item]._line_numbers["individual_id"]}')
+        else:
+              i.append(item)
+
+    for item in family.keys():
+        if item in i:
+            warning.append(f'US22: {item} id has a duplicate in line number {family[item]._line_numbers["family_id"]}')
+        else:
+              i.append(item)
+
+    return warning 
+                           
+                           
+                           
     """US23"""
     def uniqueDOBandName(individual):
         allUnique = True
