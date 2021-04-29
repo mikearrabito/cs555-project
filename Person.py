@@ -325,7 +325,25 @@ class Person:
             output += "All families have unique wife name, husband name, and marriage date\n"
         return (flag, output)
         
-        
+    """ US29"""
+    def US_29(self):
+    result=[]
+    for key, individual in self._individual.items():
+        if individual._death_date != 'NA':
+            result.append(f'{individual._name} on line number {individual.get_line_numbers()["date"]["birth"]}')
+    return(result)
+                          
+    """US30"""
+    def us_30(individual):
+    warnings = []
+    for indi_id in individual:
+        _individual = individual[indi_id]
+        if (_individual._is_alive == True and _individual._famS != None):
+            warnings.append(f' {_individual._name} is married and alive on line number {_individual.get_line_numbers()["date"]["birth"]}')
+    return warnings
+                          
+                          
+                          
     """US31"""
     def living_single(self, individual):
     """US 31: Living single
